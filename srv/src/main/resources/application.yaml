@@ -1,0 +1,31 @@
+---
+spring:
+  config.activate.on-profile: default
+  sql.init.schema-locations: classpath:schema-h2.sql
+cds:
+  data-source.auto-config.enabled: false
+  security:
+    mock:
+      users:
+        - name: Viewer-User
+          security:
+            mock:
+              users:
+                - name: Viewer-User
+                  password: viewer-pass
+                  tenant: CrazyCars
+                  roles:
+                    - Viewer
+                  attributes:
+                    Country: [ GER, FR ]
+                  additional:
+                    email: myviewer@crazycars.com
+                  features:
+                    - cruise
+                    - park
+
+                - name: Privileged-User
+                  password: privileged-pass
+                  privileged: true
+                  features:
+                    - "*"
